@@ -1,11 +1,12 @@
 import express from "express";
 import { Product } from "../Models/ProductModel.js";
+import verifyUser from "../middleware/VerifyUser.js";
 
 export default function ProductController(): express.Router {
   const router = express.Router();
 
   /*GET all products*/
-  router.get("/", async (req, res, next) => {
+  router.get("/", verifyUser, async (req, res, next) => {
     try {
       const products = await Product.find();
       return res.send(products);
@@ -15,7 +16,7 @@ export default function ProductController(): express.Router {
   });
 
   /*GET product by id*/
-  router.get("/:id", async (req, res, next) => {
+  router.get("/:id", verifyUser, async (req, res, next) => {
     try {
       const { id } = req.params;
       const product = await Product.findOne({ _id: id });
@@ -31,7 +32,7 @@ export default function ProductController(): express.Router {
   });
 
   /*POST: create new product*/
-  router.post("/", async (req, res, next) => {
+  router.post("/", verifyUser, async (req, res, next) => {
     try {
       const { name, price, description } = req.body;
 
@@ -48,7 +49,7 @@ export default function ProductController(): express.Router {
   });
 
   /*PUT: update existing product*/
-  router.put("/:id", async (req, res, next) => {
+  router.put("/:id", verifyUser, async (req, res, next) => {
     try {
       const { name, price, description } = req.body;
       const { id } = req.params;
@@ -65,7 +66,7 @@ export default function ProductController(): express.Router {
   });
 
   /*DELETE existing product*/
-  router.delete("/:id", async (req, res, next) => {
+  router.delete("/:id", verifyUser, async (req, res, next) => {
     try {
       const { id } = req.params;
 
