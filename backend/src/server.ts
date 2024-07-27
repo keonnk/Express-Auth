@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import cors from 'cors'
 import session from "express-session";
 import MongoStore from "connect-mongo";
 import UserController from "./Controllers/UserController";
@@ -14,6 +15,7 @@ async function main() {
 
   await mongoose.connect(MONGO_URI);
 
+  app.use(cors())
   app.use(express.json());
 
   app.use(
