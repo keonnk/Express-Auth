@@ -8,17 +8,15 @@ type LoginPageProps = {
 };
 
 export default function LoginPage({ isSignup }: LoginPageProps) {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-
-  console.log(username)
-  console.log(password)
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   let navigate = useNavigate();
 
   const submitForm = async (e: FormEvent<HTMLFormElement>) => {
     const response = await fetch("http://localhost:4000/login", {
       method: "POST",
+      credentials: "include",
       body: JSON.stringify({
         username: username,
         password: password,
@@ -44,14 +42,12 @@ export default function LoginPage({ isSignup }: LoginPageProps) {
         }}
       >
         <TextField
-          ref={usernameRef}
           required
           label="username"
           variant="outlined"
           onChange={(e) => setUsername(e.target.value)}
         />
         <TextField
-          ref={passwordRef}
           required
           label="password"
           variant="outlined"
