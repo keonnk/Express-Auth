@@ -16,7 +16,6 @@ export default function LoginPage({ isSignup }: LoginPageProps) {
   const submitForm = async (e: FormEvent<HTMLFormElement>) => {
     const response = await fetch("http://localhost:4000/login", {
       method: "POST",
-      credentials: "include",
       body: JSON.stringify({
         username: username,
         password: password,
@@ -51,6 +50,7 @@ export default function LoginPage({ isSignup }: LoginPageProps) {
           required
           label="password"
           variant="outlined"
+          type="password"
           onChange={(e) => setPassword(e.target.value)}
         />
         <Button type="submit" variant="contained">

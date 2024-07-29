@@ -1,6 +1,7 @@
 import express from "express";
 import bcrypt from "bcryptjs";
 import { User } from "../Models/UserModel";
+import verifyUser from "../middleware/VerifyUser";
 
 export default function UserController(): express.Router {
   const router = express.Router();
@@ -17,7 +18,7 @@ export default function UserController(): express.Router {
 
       await User.create({ username, password: hashedPassword });
 
-      res.send("User successfully created");
+      return res.send("User successfully created");
     } catch (err) {
       next(err);
     }
@@ -46,7 +47,7 @@ export default function UserController(): express.Router {
       //@ts-ignore
       req.session.user = user._id;
 
-      res.send("User logged in");
+      return res.send("User logged in");
     } catch (err) {
       next(err);
     }
