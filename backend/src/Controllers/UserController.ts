@@ -18,7 +18,7 @@ export default function UserController(): express.Router {
 
       await User.create({ username, password: hashedPassword });
 
-      return res.send("User successfully created");
+      return res.status(201).send("User successfully created");
     } catch (err) {
       next(err);
     }

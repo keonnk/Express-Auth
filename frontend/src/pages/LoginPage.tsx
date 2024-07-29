@@ -1,7 +1,8 @@
 import { TextField } from "@mui/material";
 import Button from "@mui/material/Button";
-import { FormEvent, useRef, useState } from "react";
+import { FormEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 type LoginPageProps = {
   isSignup: boolean;
@@ -14,19 +15,24 @@ export default function LoginPage({ isSignup }: LoginPageProps) {
   let navigate = useNavigate();
 
   const submitForm = async (e: FormEvent<HTMLFormElement>) => {
-    const response = await fetch("http://localhost:4000/login", {
-      method: "POST",
-      body: JSON.stringify({
-        username: username,
-        password: password,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `http://localhost:4000/${isSignup ? "signup" : "login"}`,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          username: username,
+          password: password,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
-    if (response.status === 200) {
-      navigate("/products");
+    if (response.status === 201 || response.status === 200) {
+      isSignup ? navigate("/") : navigate("/products");
+    } else {
+      toast.error("Invalid username or password", { position: "top-right" });
     }
   };
 
