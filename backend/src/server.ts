@@ -39,6 +39,10 @@ async function main() {
   app.use("/", UserController());
   app.use("/product", ProductController());
 
+  app.get("/", (req, res) => {
+    res.send("Server running");
+  });
+
   app.listen(PORT, () => {
     console.log(`App listening on port ${PORT}`);
   });
