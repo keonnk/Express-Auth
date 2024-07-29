@@ -42,7 +42,7 @@ export default function ProductController(): express.Router {
 
       const product = await Product.create({ name, price, description });
 
-      return res.send(product); //Return newly created product
+      return res.status(201).send(product); //Return newly created product
     } catch (err) {
       next(err);
     }

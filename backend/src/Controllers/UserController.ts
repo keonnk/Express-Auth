@@ -18,7 +18,7 @@ export default function UserController(): express.Router {
 
       await User.create({ username, password: hashedPassword });
 
-      return res.send("User successfully created");
+      return res.status(201).send("User successfully created");
     } catch (err) {
       next(err);
     }
@@ -48,6 +48,16 @@ export default function UserController(): express.Router {
       req.session.user = user._id;
 
       return res.send("User logged in");
+    } catch (err) {
+      next(err);
+    }
+  });
+
+  router.post("/logout", async (req, res, next) => {
+    try {
+      req.session.destroy(() => {});
+
+      return res.send("User logged out");
     } catch (err) {
       next(err);
     }

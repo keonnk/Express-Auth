@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import Product from "../components/Product";
 import { Product as ProductType, ProductWithoutId } from "../types/Product";
 import NewProductModal from "../components/NewProductModal";
+import { redirect } from "react-router-dom";
+import { toast } from "react-toastify";
 
 type ProductPageProps = {};
 
@@ -56,13 +58,30 @@ export default function ProductPage() {
     handleClose();
   };
 
+  const logout = async () => {
+    const res = await fetch(`http://localhost:4000/logout`, {
+      credentials: "include",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (res.status === 200) {
+      redirect('/login')
+    }
+    else {
+      toast.error("Logout was unsuccessful")
+    }
+  }
+
   return (
     <div className="flex flex-col justify-center pt-[10%] mx-[20%] items-center gap-5">
       <div className="flex gap-5">
         <Button variant="contained" onClick={handleOpen}>
           Add Product
         </Button>
-        <Button>Logout</Button>
+        <Button onClick={logout}>Logout</Button>
       </div>
       <div className="flex flex-wrap justify-center gap-5">
         {products
