@@ -57,23 +57,29 @@ export default function ProductPage() {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center h-[100vh] gap-5">
-      <Button onClick={handleOpen}>Add Product</Button>
-      {products
-        ? /*@ts-ignore*/
-          products.map((product) => {
-            return (
-              <Product
-                _id={product._id}
-                name={product.name}
-                price={product.price}
-                description={product.description}
-                onDelete={() => deleteProduct(product._id)}
-              />
-            );
-          })
-        : ""}
-      <Button>Logout</Button>
+    <div className="flex flex-col justify-center pt-[10%] mx-[20%] items-center gap-5">
+      <div className="flex gap-5">
+        <Button variant="contained" onClick={handleOpen}>
+          Add Product
+        </Button>
+        <Button>Logout</Button>
+      </div>
+      <div className="flex flex-wrap justify-center gap-5">
+        {products
+          ? /*@ts-ignore*/
+            products.map((product) => {
+              return (
+                <Product
+                  _id={product._id}
+                  name={product.name}
+                  price={product.price}
+                  description={product.description}
+                  onDelete={() => deleteProduct(product._id)}
+                />
+              );
+            })
+          : ""}
+      </div>
       <NewProductModal
         openState={modalOpen}
         onSubmit={submitNewProduct}

@@ -13,10 +13,10 @@ export default function Product({
   name,
   price,
   description,
-  onDelete
+  onDelete,
 }: ProductProps) {
   return (
-    <Card className="flex flex-col gap-5 p-5">
+    <Card className="flex flex-col min-h-32 justify-between gap-5 p-5">
       <div>
         <div className="text-2xl">{name}</div>
         <div className="text-xl">${price}</div>
