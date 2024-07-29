@@ -53,5 +53,15 @@ export default function UserController(): express.Router {
     }
   });
 
+  router.post("/logout", async (req, res, next) => {
+    try {
+      req.session.destroy(() => {});
+
+      return res.send("User logged out");
+    } catch (err) {
+      next(err);
+    }
+  });
+
   return router;
 }

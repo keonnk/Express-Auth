@@ -9,7 +9,6 @@ export default function verifyUser(
   try {
     //@ts-ignore
     const { user } = req.session;
-    console.log("user: ", user);
 
     if (!user) {
       throw new Error(

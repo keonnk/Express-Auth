@@ -19,6 +19,7 @@ export default function LoginPage({ isSignup }: LoginPageProps) {
       `http://localhost:4000/${isSignup ? "signup" : "login"}`,
       {
         method: "POST",
+        credentials: "include",
         body: JSON.stringify({
           username: username,
           password: password,
