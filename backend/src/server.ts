@@ -10,11 +10,11 @@ import ProductController from "./Controllers/ProductController";
 async function main() {
   const app = express();
   dotenv.config();
-  const PORT = process.env.PORT;
-  const SECRET = process.env.SECRET;
-  const MONGO_URI = process.env.MONGO_URI;
-  const FRONTEND_URL = process.env.FRONTEND_URL;
-  const DEV_ENV = process.env.DEV_ENV ?? 1;
+  const PORT = process.env.port;
+  const SECRET = process.env.secret;
+  const MONGO_URI = process.env.mongo_uri;
+  const FRONTEND_URL = process.env.frontend_url;
+  const DEV_ENV = process.env.dev_env ?? 1;
 
   await mongoose.connect(MONGO_URI);
 
