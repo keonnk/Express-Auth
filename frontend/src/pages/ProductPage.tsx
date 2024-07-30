@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Product from "../components/Product";
 import { Product as ProductType, ProductWithoutId } from "../types/Product";
 import NewProductModal from "../components/NewProductModal";
-import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 type ProductPageProps = {};
@@ -11,6 +11,8 @@ type ProductPageProps = {};
 export default function ProductPage() {
   const [products, setProducts] = useState<ProductType[]>([]);
   const [modalOpen, setModalOpen] = useState(false);
+
+  let navigate = useNavigate();
 
   const handleOpen = () => setModalOpen(true);
   const handleClose = () => setModalOpen(false);
@@ -21,6 +23,10 @@ export default function ProductPage() {
         credentials: "include",
       });
       setProducts(await res.json());
+
+      if(res.status !== 200) {
+        toast.error("Failed to fetch products")
+      }
     };
     fetchProducts();
   }, []);
@@ -68,12 +74,11 @@ export default function ProductPage() {
     });
 
     if (res.status === 200) {
-      redirect('/login')
+      navigate("/");
+    } else {
+      toast.error("Logout was unsuccessful");
     }
-    else {
-      toast.error("Logout was unsuccessful")
-    }
-  }
+  };
 
   return (
     <div className="flex flex-col justify-center pt-[10%] mx-[20%] items-center gap-5">
