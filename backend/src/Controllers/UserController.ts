@@ -6,6 +6,22 @@ import verifyUser from "../middleware/VerifyUser";
 export default function UserController(): express.Router {
   const router = express.Router();
 
+  router.get("/user", async (req, res, next) => {
+    try {
+      //@ts-ignore
+      const user_id = req.session.user; //take user id off of cookie
+      const user = await User.findOne(user_id);
+
+      if (!user) {
+        throw new Error("Logged in user not found in system");
+      }
+
+      return res.send(user);
+    } catch (err) {
+      next(err);
+    }
+  });
+
   router.post("/signup", async (req, res, next) => {
     try {
       const { username, password } = req.body;
