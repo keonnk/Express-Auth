@@ -22,14 +22,15 @@ export default function ProductPage() {
       const res = await fetch("http://localhost:4000/product", {
         credentials: "include",
       });
-      setProducts(await res.json());
 
       if (res.status !== 200) {
-        toast.error("Failed to fetch products");
+        toast.error("Failed to fetch products, please login");
+      } else {
+        setProducts(await res.json());
       }
     };
     fetchProducts();
-  }, [products]);
+  }, []);
 
   const deleteProduct = async (_id: String) => {
     const res = await fetch(`http://localhost:4000/product/${_id}`, {
@@ -56,7 +57,7 @@ export default function ProductPage() {
       },
     });
 
-    if (res.status === 200) {
+    if (res.status === 201) {
       const newProduct = await res.json();
       setProducts([...products, newProduct]);
     }
