@@ -31,9 +31,15 @@ export default function LoginPage({ isSignup }: LoginPageProps) {
     );
 
     if (response.status === 201 || response.status === 200) {
+      setUsername("");
+      setPassword("");
       isSignup ? navigate("/") : navigate("/products");
     } else {
-      toast.error("Invalid username or password", { position: "top-right" });
+      if (isSignup) {
+        toast.error("Username already exists");
+      } else {
+        toast.error("Invalid username or password", { position: "top-right" });
+      }
     }
   };
 
@@ -51,6 +57,7 @@ export default function LoginPage({ isSignup }: LoginPageProps) {
           required
           label="username"
           variant="outlined"
+          value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
         <TextField
@@ -58,6 +65,7 @@ export default function LoginPage({ isSignup }: LoginPageProps) {
           label="password"
           variant="outlined"
           type="password"
+          value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
         <Button type="submit" variant="contained">

@@ -1,7 +1,6 @@
 import express from "express";
 import bcrypt from "bcryptjs";
 import { User } from "../Models/UserModel";
-import verifyUser from "../middleware/VerifyUser";
 
 export default function UserController(): express.Router {
   const router = express.Router();
@@ -28,6 +27,11 @@ export default function UserController(): express.Router {
 
       if (!username || !password) {
         throw new Error("Missing username or password");
+      }
+
+      const existingUsername = User.findOne({ username });
+      if (existingUsername) {
+        throw new Error("Username already exists");
       }
 
       const hashedPassword = bcrypt.hashSync(password);
