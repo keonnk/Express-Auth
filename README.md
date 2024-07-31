@@ -2,6 +2,10 @@
 
 ## Demo
 
+https://github.com/user-attachments/assets/732e4981-8821-45f3-9488-ca1ba601642f
+
+
+
 ## How to run locally
 
 Open two terminals
@@ -22,11 +26,11 @@ Terminal 2:
 
 `npm run dev`
 
-## Setup .env on backend
+### Setup .env on backend
 
 Create .env in backend folder<br>
 set the port to any port you'd like<br>
 set mongo_uri to your mongo db connection string<br>
 set secret to any string you'd like<br>
 set frontend_url to `http://localhost:5173` (assuming its run locally)<br>
-`dev_env=1`<br>
+set `dev_env` to 1
