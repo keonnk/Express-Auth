@@ -45,7 +45,7 @@ export default function LoginPage({ isSignup }: LoginPageProps) {
 
   return (
     <div className="h-[100vh] flex flex-col gap-10 justify-center items-center">
-      <h1 className="text-4xl">{isSignup ? "Register Account" : "Login"}</h1>
+      <h1 className="text-4xl">{isSignup ? "Create Account" : "Login"}</h1>
       <form
         className="flex flex-col gap-3"
         onSubmit={(e) => {
