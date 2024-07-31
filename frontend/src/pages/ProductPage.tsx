@@ -24,12 +24,12 @@ export default function ProductPage() {
       });
       setProducts(await res.json());
 
-      if(res.status !== 200) {
-        toast.error("Failed to fetch products")
+      if (res.status !== 200) {
+        toast.error("Failed to fetch products");
       }
     };
     fetchProducts();
-  }, []);
+  }, [products]);
 
   const deleteProduct = async (_id: String) => {
     const res = await fetch(`http://localhost:4000/product/${_id}`, {
