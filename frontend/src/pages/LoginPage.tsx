@@ -16,7 +16,7 @@ export default function LoginPage({ isSignup }: LoginPageProps) {
 
   const submitForm = async (e: FormEvent<HTMLFormElement>) => {
     const response = await fetch(
-      `http://localhost:4000/${isSignup ? "signup" : "login"}`,
+      `${import.meta.env.VITE_API_URL}}/${isSignup ? "signup" : "login"}`,
       {
         method: "POST",
         credentials: "include",

@@ -19,7 +19,7 @@ export default function ProductPage() {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const res = await fetch("http://localhost:4000/product", {
+      const res = await fetch(import.meta.env.VITE_API_URL, {
         credentials: "include",
       });
 
@@ -33,7 +33,7 @@ export default function ProductPage() {
   }, []);
 
   const deleteProduct = async (_id: String) => {
-    const res = await fetch(`http://localhost:4000/product/${_id}`, {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/${_id}`, {
       credentials: "include",
       method: "DELETE",
     });
@@ -44,7 +44,7 @@ export default function ProductPage() {
   };
 
   const submitNewProduct = async (product: ProductWithoutId) => {
-    const res = await fetch(`http://localhost:4000/product`, {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/product`, {
       credentials: "include",
       method: "POST",
       body: JSON.stringify({
@@ -66,7 +66,7 @@ export default function ProductPage() {
   };
 
   const logout = async () => {
-    const res = await fetch(`http://localhost:4000/logout`, {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/logout`, {
       credentials: "include",
       method: "POST",
       headers: {
